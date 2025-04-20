@@ -33,6 +33,12 @@ app.get("/", (req, res, next) => {
 	res.render("index");
 });
 
+app.get("/signup", (req, res) => {
+	res.render("signup");
+});
+app.post("/", (req, res, next) => {
+    
+})
 app.listen(PORT, () => {
 	console.log(`http://localhost:${PORT}`);
 });
