@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import path from "path";
 dotenv.config();
+import userRoutes from "./routes/userRoutes.js";
 const PORT = 3000;
 
 const app = express();
@@ -29,16 +30,8 @@ app.use(
 app.use(passport.session());
 
 // routes
-app.get("/", (req, res, next) => {
-	res.render("index");
-});
+app.use(userRoutes);
 
-app.get("/signup", (req, res) => {
-	res.render("signup");
-});
-app.post("/", (req, res, next) => {
-    
-})
 app.listen(PORT, () => {
 	console.log(`http://localhost:${PORT}`);
 });
