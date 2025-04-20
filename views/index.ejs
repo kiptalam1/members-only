@@ -1,10 +1,28 @@
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Index</title>
-	</head>
+	<%- include('partials/head') %>
 	<body>
-		<h1>Index page</h1>
+		<!-- <%- include('partials/header') %> -->
+
+		<h1>index page</h1>
+		<div class="welcome">
+			<img
+				src="/images/gk-logo5.png"
+				alt="GATEkept logo"
+				class="logo-img"
+				style="
+					width: 100;
+					height: 100;
+					background-color: #25d366;
+					border-radius: 50%;
+				"
+			/>
+			<h1>Welcome to GATEkept</h1>
+			<p>Private messaging for your circle only.</p>
+
+			<div class="auth-links">
+				<a href="/signup" class="signup-btn">Sign Up</a>
+				<a href="/login" class="login-btn">Log In</a>
+			</div>
+		</div>
 	</body>
 </html>
