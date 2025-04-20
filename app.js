@@ -13,8 +13,8 @@ const app = express();
 
 // set up view engine and ejs
 app.set("view engine", "ejs");
-app.set(express.urlencoded({ extended: false }));
-
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 //set up files paths
 app.use(express.static(path.join(process.cwd(), "public")));
 // set views directory.
@@ -27,9 +27,11 @@ app.use(
 		saveUninitialized: false,
 	})
 );
+app.use(passport.initialize());
+
 app.use(passport.session());
 
-// routes
+// routers
 app.use(userRoutes);
 
 app.listen(PORT, () => {

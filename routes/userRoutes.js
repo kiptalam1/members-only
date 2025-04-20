@@ -2,12 +2,12 @@ import express from "express";
 import {
 	renderIndexPage,
 	renderSignupForm,
-	getUserForm,
+	handleSignup,
 } from "../controllers/userController.js";
 const router = express.Router();
 
 router.get("/", renderIndexPage);
 router.get("/signup", renderSignupForm);
-router.post("/signup", getUserForm);
+router.post("/signup", handleSignup);
 
 export default router;
