@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import path from "path";
 dotenv.config();
+import initializePassport from "./configs/passportConfig.js";
 import userRoutes from "./routes/userRoutes.js";
 const PORT = 3000;
 
@@ -27,11 +28,15 @@ app.use(
 		saveUninitialized: false,
 	})
 );
-app.use(passport.initialize());
 
+// initialize passport middleware.
+initializePassport(passport);
+
+// use passport middleware
+app.use(passport.initialize());
 app.use(passport.session());
 
-// routers
+// routes
 app.use(userRoutes);
 
 app.listen(PORT, () => {

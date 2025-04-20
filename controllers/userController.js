@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import pool from "../models/pool.js";
+import passport from "passport";
 export function renderIndexPage(req, res) {
 	res.render("index");
 }
@@ -41,10 +42,14 @@ export async function handleSignup(req, res, next) {
 	}
 }
 
-export function renderLoginForm (req, res) {
-    res.render("login", { error: req.session.message?.[0]})
-    //clear old errors
-    req.session.messages = [];
+export function renderLoginForm(req, res) {
+	res.render("login", { error: req.session.message?.[0] });
+	//clear old errors
+	req.session.messages = [];
 }
 
-// export const handleLogin
+export const handleLogin = passport.authenticate("local", {
+	successRedirect: "/messages",
+	failureRedirect: "/login",
+	failureMessage: true,
+});
