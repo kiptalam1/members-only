@@ -106,7 +106,7 @@ export async function updateProfile(req, res) {
 		res.redirect("/profile");
 	} catch (error) {
 		console.error("Error updating user data:", error);
-		res.status(500).send("Error updating profile");
+		res.redirect("/profile/edit");
 	}
 }
 // log the user out
