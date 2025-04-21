@@ -1,7 +1,11 @@
 import bcrypt from "bcryptjs";
 import pool from "../models/pool.js";
 import passport from "passport";
+
 export function renderIndexPage(req, res) {
+	if (req.isAuthenticated()) {
+		return res.redirect("/messages");
+	}
 	res.render("index");
 }
 
@@ -53,3 +57,32 @@ export const handleLogin = passport.authenticate("local", {
 	failureRedirect: "/login",
 	failureMessage: true,
 });
+
+export async function renderProfilePage(req, res, next) {
+	if (!req.isAuthenticated()) {
+		return res.redirect("/login");
+	}
+
+	try {
+		//fetch user data from database
+		const result = await pool.query("SELECT * FROM users WHERE id = $1", [
+			req.user.id,
+		]);
+		const user = result.rows[0];
+		// render the profile page with user data
+		res.render("profile", { user });
+	} catch (error) {
+		console.error(error);
+		res.status(500).send("Error fetching user profile");
+	}
+}
+
+// log the user out
+export function handleLogout(req, res) {
+	req.logout((err) => {
+		if (err) {
+			return next(err);
+		}
+		res.redirect("/login");
+	});
+}

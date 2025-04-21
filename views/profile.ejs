@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('partials/head') %>
+
+	<body>
+		<div class="main-container">
+			<div class="profile-container">
+				<h1>Welcome, <%= user.first_name %> <%= user.last_name %></h1>
+				<p>Email: <%= user.email %></p>
+
+				<a href="/logout">Logout</a>
+				<!-- Logout button -->
+				<a href="/edit-profile">Edit Profile</a>
+				<!-- Optionally, you could add an edit profile page -->
+			</div>
+		</div>
+		<script>
+			// Scroll to the top of the page after loading
+			window.onload = function () {
+				window.scrollTo(0, 0);
+			};
+		</script>
+	</body>
+</html>

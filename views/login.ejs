@@ -3,21 +3,23 @@
 	<%- include('partials/head') %>
 
 	<body>
-		<h1>Login to GATEkept</h1>
-		<form action="/login" method="POST">
-			<div>
-				<label for="email">Email:</label>
-				<input type="email" name="email" id="email" required />
-			</div>
-			<div>
-				<label for="password">Password:</label>
-				<input type="password" name="password" id="password" required />
-			</div>
-			<button type="submit">Log In</button>
-		</form>
+		<div class="main-container">
+			<h1>Login to GATEkept</h1>
+			<form action="/login" method="POST">
+				<div>
+					<label for="email">Email:</label>
+					<input type="email" name="email" id="email" required />
+				</div>
+				<div>
+					<label for="password">Password:</label>
+					<input type="password" name="password" id="password" required />
+				</div>
+				<button type="submit">Log In</button>
+			</form>
 
-		<% if (typeof error !== "undefined") { %>
-		<p style="color: red"><%= error %></p>
-		<% } %>
+			<% if (typeof error !== "undefined") { %>
+			<p style="color: red"><%= error %></p>
+			<% } %>
+		</div>
 	</body>
 </html>

@@ -8,12 +8,14 @@ import path from "path";
 dotenv.config();
 import initializePassport from "./configs/passportConfig.js";
 import userRoutes from "./routes/userRoutes.js";
+import messageRoutes from "./routes/messagesRoutes.js";
 const PORT = 3000;
 
 const app = express();
 
 // set up view engine and ejs
 app.set("view engine", "ejs");
+// body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 //set up files paths
@@ -37,8 +39,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // routes
-app.use(userRoutes);
+app.use("/", userRoutes);
+app.use("/messages", messageRoutes);
 
+// // Redirect root to /signup or /messages if logged in
+// app.get("/", (req, res) => {
+// 	if (req.isAuthenticated()) return res.redirect("/messages");
+// 	res.redirect("/signup");
+// });
 app.listen(PORT, () => {
 	console.log(`http://localhost:${PORT}`);
 });

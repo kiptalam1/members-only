@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('partials/head') %>
+
+	<body>
+		<div class="main-container">
+			<%- include('partials/header') %>
+			<div class="chat-container">
+				<div class="messages" id="messages">
+					<% messages.forEach(message => { %>
+					<div class="message <%= message.isOwn ? 'own' : 'other' %>">
+						<!-- Display the username -->
+						<strong class="message-user"><%= message.user %></strong>
+						<% if (message.title) { %>
+						<p class="message-title"><%= message.title %></p>
+						<% } %>
+						<p class="message-content"><%= message.content %></p>
+						<span class="message-time"
+							><%= message.created_at.toLocaleString() %></span
+						>
+					</div>
+					<% }) %>
+				</div>
+
+				<form class="message-input" action="/messages" method="POST">
+					<div class="input-container">
+						<input type="text" name="title" placeholder="Title (optional)" />
+						<textarea
+							name="content"
+							id="messageContent"
+							placeholder="Type your message..."
+							required
+						></textarea>
+						<button type="submit">Send</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script>
+			// Auto scroll on page load
+			window.onload = () => {
+				const messages = document.getElementById("messages");
+				messages.scrollTop = messages.scrollHeight;
+			};
+
+			// Auto-resize textarea
+			const textarea = document.getElementById("messageContent");
+			textarea.addEventListener("input", () => {
+				textarea.style.height = "auto";
+				textarea.style.height = textarea.scrollHeight + "px";
+			});
+		</script>
+	</body>
+</html>

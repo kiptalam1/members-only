@@ -1,0 +1,331 @@
+/* Global Styles */
+body {
+	background-color: #ece5dd;
+	font-family: "Open Sans", "Roboto", Arial, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	overflow-x: hidden;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+* {
+	box-sizing: inherit;
+}
+
+body * {
+	overflow-x: hidden !important;
+	word-wrap: break-word;
+}
+
+div {
+	max-width: 100%;
+}
+
+/* Navbar Styles */
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 20px 40px;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
+	z-index: 100;
+}
+
+.logo {
+	background-color: #25d366;
+	border-radius: 50%;
+	border: 1px solid #25d366;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.nav-links {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	gap: 20px;
+	padding: 0;
+	list-style-type: none;
+}
+
+.nav-links li {
+	text-decoration: none;
+	font-size: 1.1rem;
+	transition: all 0.2s ease;
+}
+
+.nav-links li:hover {
+	background-color: #ddd;
+	color: #000;
+	font-weight: 500;
+	transform: scale(1.05);
+}
+
+.nav-links a {
+	text-decoration: none;
+	color: black;
+}
+
+/* Main Layout (Centering content properly) */
+.main-container {
+	width: 100%;
+	max-width: 1200px; /* Max width to prevent stretching too far */
+	margin: 0 auto;
+	padding-top: 80px; /* Space for fixed navbar */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* Chat Container */
+.chat-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	width: 100%; 
+	margin-top: 40px;
+	border: 1px solid black;
+}
+
+.messages {
+	flex: 1;
+	overflow-y: auto;
+	padding: 10px ;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.message {
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px;
+	max-width: 60%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	position: relative;
+}
+
+.message.own {
+	align-self: flex-start;
+	background-color: #dcf8c6;
+}
+
+.message.other {
+	align-self: flex-end;
+}
+
+.message-user {
+	font-weight: smaller;
+	color: #00796b; /* Custom color for username */
+	font-size: 0.7rem;
+}
+
+.message-title {
+	font-weight: bold;
+	margin: 0 0 5px;
+}
+
+.message-content {
+	margin: 0;
+}
+
+.message-time {
+	font-size: 0.75rem;
+	color: gray;
+	margin-top: 5px;
+	display: block;
+	text-align: right;
+}
+
+.message-input {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-top: 1px solid #ccc;
+	padding: 10px;
+}
+
+.input-container {
+	position: relative;
+	width: 100%;
+}
+
+.message-input input,
+.message-input textarea {
+	font: inherit;
+	margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	resize: none; /* prevent manual resizing */
+	width: 100%;
+}
+
+.message-input textarea {
+	padding-right: 60px; /* Space for the button */
+}
+
+.message-input button {
+	position: absolute;
+	right: 10px;
+	bottom: 30px;
+	padding: 10px;
+	background-color: #25d366;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+/* Profile Container */
+.profile-container {
+	max-width: 900px;
+	width: 100%;
+	margin: 30px auto;
+	padding: 20px;
+	background-color: white;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.profile-container h1 {
+	font-size: 2rem;
+	color: #333;
+}
+
+.profile-container p {
+	font-size: 1rem;
+	color: #555;
+}
+
+/* Links (Logout & Edit Profile) */
+.profile-container a {
+	display: inline-block;
+	margin-top: 15px;
+	padding: 10px 20px;
+	color: #fff;
+	background-color: #25d366; /* WhatsApp green */
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.profile-container a:hover {
+	background-color: #128c7e; /* Darker WhatsApp green */
+}
+
+/* Logout Button */
+.profile-container a:first-child {
+	background-color: #f44336; /* Red color for logout */
+}
+
+.profile-container a:first-child:hover {
+	background-color: #d32f2f;
+}
+
+/* Login Form Styles */
+form {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 400px;
+}
+
+form div {
+	margin-bottom: 15px;
+}
+
+label {
+	display: block;
+	font-size: 1rem;
+	color: #333;
+	margin-bottom: 5px;
+}
+
+input {
+	width: 100%;
+	padding: 10px;
+	font-size: 1rem;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	font-size: 1rem;
+	background-color: #25d366; /* WhatsApp Green */
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #128c7e; /* Darker green */
+}
+
+button:focus {
+	outline: none;
+}
+
+p {
+	color: red;
+	font-size: 0.9rem;
+	margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+	.navbar {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.nav-links {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.chat-container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 15px;
+	}
+	
+	h1 {
+		font-size: 1.5rem;
+	}
+	
+	form {
+		padding: 15px;
+		margin: 15px;
+	}
+
+	input,
+	button {
+		font-size: 0.9rem;
+		padding: 8px;
+	}
+}
