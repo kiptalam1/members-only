@@ -1,8 +1,8 @@
 import express from "express";
 import session from "express-session";
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
-import bcrypt from "bcryptjs";
+// import { Strategy as LocalStrategy } from "passport-local";
+// import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import path from "path";
 dotenv.config();
@@ -43,10 +43,7 @@ app.use("/", userRoutes);
 app.use("/messages", messageRoutes);
 
 // // Redirect root to /signup or /messages if logged in
-// app.get("/", (req, res) => {
-// 	if (req.isAuthenticated()) return res.redirect("/messages");
-// 	res.redirect("/signup");
-// });
+
 app.listen(PORT, () => {
-	console.log(`http://localhost:${PORT}`);
+	console.log(`listening at ${PORT}`);
 });
