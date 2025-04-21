@@ -77,6 +77,38 @@ export async function renderProfilePage(req, res, next) {
 	}
 }
 
+// show profile edit form
+export async function showEditForm(req, res) {
+	try {
+		const userId = req.user.id;
+		const user = await pool.query("SELECT * FROM users WHERE id = $1", [
+			userId,
+		]);
+		res.render("edit-profile", { user: user.rows[0] });
+	} catch (error) {
+		console.error("Error fetching user data for edit profile:", err);
+		res.status(500).send("Error loading user data for profile edit");
+	}
+}
+
+// handle profile update form submission
+export async function updateProfile(req, res) {
+	const { first_name, last_name, email } = req.body;
+	const userId = req.user.id;
+
+	try {
+		await pool.query(
+			`UPDATE users
+			SET first_name = $1, last_name = $2, email = $3
+			WHERE id = $4`,
+			[first_name, last_name, email, userId]
+		);
+		res.redirect("/profile");
+	} catch (error) {
+		console.error("Error updating user data:", error);
+		res.status(500).send("Error updating profile");
+	}
+}
 // log the user out
 export function handleLogout(req, res) {
 	req.logout((err) => {

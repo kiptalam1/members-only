@@ -372,6 +372,11 @@ h2 span {
 	color: #555;
 }
 
+/* edit profile*/
+.edit-form {
+	margin-top: 100px;
+}
+
 /* Links (Logout & Edit Profile buttons) */
 .profile-container a {
 	display: inline-block;

@@ -1,0 +1,34 @@
+<%- include('partials/head') %> <%- include('partials/header') %>
+
+<div class="main-container">
+	<form action="/profile/edit" method="POST" class="edit-form">
+
+		<label for="first_name">First Name:</label>
+		<input
+			type="text"
+			name="first_name"
+			value="<%= user.first_name %>"
+			required
+		/>
+
+		<label for="last_name">Last Name:</label>
+		<input
+			type="text"
+			name="last_name"
+			value="<%= user.last_name %>"
+			required
+		/>
+
+		<label for="email">Email:</label>
+		<input type="email" name="email" value="<%= user.email %>" required />
+
+		<button type="submit">Save Changes</button>
+	</form>
+</div>
+
+<script>
+	// Scroll to the top of the page after loading
+	window.onload = function () {
+		window.scrollTo(0, 0);
+	};
+</script>
