@@ -10,53 +10,60 @@ export function renderIndexPage(req, res) {
 }
 
 export function renderSignupForm(req, res) {
-	res.render("signup");
+	res.render("signup", { error: null });
 }
-export async function handleSignup(req, res, next) {
+// Handle signup logic
+export async function handleSignup(req, res) {
 	const { first_name, last_name, email, password, password2 } = req.body;
 
 	try {
-		// validate passwords.
+		// Validate password match
 		if (password !== password2) {
-			return res.status(400).send("Passwords do not match.");
+			return res.status(400).render("signup", {
+				error: "Passwords do not match.",
+			});
 		}
 
-		// check if email is already in use.
-		const userExist = await pool.query("SELECT * FROM users WHERE email = $1", [
-			email,
-		]);
-		if (userExist.rows.length > 0) {
-			return res.status(400).send("Email is already registered.");
+		// Check if email already exists
+		const existingUser = await pool.query(
+			"SELECT * FROM users WHERE email = $1",
+			[email]
+		);
+		if (existingUser.rows.length > 0) {
+			return res.status(400).render("signup", {
+				error: "Email is already registered.",
+			});
 		}
 
-		// hash password
+		// Hash the password
 		const hashedPassword = await bcrypt.hash(password, 10);
 
-		//insert new user into DB
+		// Insert new user into DB
 		await pool.query(
 			"INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)",
 			[first_name, last_name, email, hashedPassword]
 		);
 
-		//Redirect user to login page
 		res.redirect("/login");
-	} catch (error) {
-		console.error("Signup error:", error);
-		res.status(500).send("Something went wrong. Please try again.");
+	} catch (err) {
+		console.error("Signup error:", err);
+		res.status(500).render("signup", {
+			error: "Something went wrong. Please try again later.",
+		});
 	}
 }
-
 export function renderLoginForm(req, res) {
-	res.render("login", { error: req.session.message?.[0] });
-	//clear old errors
-	req.session.messages = [];
+	const messages = req.flash("error"); // Get flash messages
+	res.render("login", { messages });
 }
 
-export const handleLogin = passport.authenticate("local", {
-	successRedirect: "/messages",
-	failureRedirect: "/login",
-	failureMessage: true,
-});
+export const handleLogin = (req, res, next) => {
+	passport.authenticate("local", {
+		successRedirect: "/messages",
+		failureRedirect: "/login",
+		failureFlash: true, // Let passport handle the error message
+	})(req, res, next);
+};
 
 export async function renderProfilePage(req, res, next) {
 	if (!req.isAuthenticated()) {

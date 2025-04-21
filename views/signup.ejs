@@ -3,7 +3,10 @@
 	<%- include('partials/head') %>
 	<body>
 		<div class="main-container">
-	<%- include('partials/header') %>
+			<%- include('partials/header') %> <% if (typeof error !== "undefined" &&
+			error) { %>
+			<div class="error-message"><%= error %></div>
+			<% } %>
 
 			<form action="/signup" method="POST" class="signup-form">
 				<input

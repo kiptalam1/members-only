@@ -197,7 +197,7 @@ button:focus {
 }
 /* Sign up Page */
 .signup-form {
-	margin-top: 100px;
+	margin-top: 20px;
 }
 /* Login page */
 .login-form {
@@ -408,6 +408,35 @@ h2 span {
 .profile-container .logout-link:hover {
 	background-color: #f14645;
 	color: white;
+}
+
+/* ERRORS */
+.error-message {
+	color: #721c24;
+	background-color: #f8d7da;
+	border: 1px solid #f5c6cb;
+	padding: 1rem;
+	margin-top: 100px;
+	border-radius: 0.5rem;
+	font-weight: bold;
+	text-align: center;
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-message p {
+	margin: 0;
+	text-align: center;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Responsive Design */

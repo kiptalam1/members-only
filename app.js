@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import flash from "connect-flash";
 import passport from "passport";
 // import { Strategy as LocalStrategy } from "passport-local";
 // import bcrypt from "bcryptjs";
@@ -31,6 +32,15 @@ app.use(
 	})
 );
 
+app.use(flash());
+app.use((req, res, next) => {
+	// Make flash messages available to all views
+	res.locals.messages = {
+		error: req.flash("error"),
+		success: req.flash("success"),
+	};
+	next();
+});
 // initialize passport middleware.
 initializePassport(passport);
 
@@ -42,7 +52,6 @@ app.use(passport.session());
 app.use("/", userRoutes);
 app.use("/messages", messageRoutes);
 
-// // Redirect root to /signup or /messages if logged in
 
 app.listen(PORT, () => {
 	console.log(`listening at ${PORT}`);

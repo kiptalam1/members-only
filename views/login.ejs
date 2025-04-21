@@ -6,6 +6,15 @@
 		<div class="main-container">
 			<%- include('partials/header') %>
 
+			<!-- Display Error Message if Available -->
+			<% if (locals.messages?.error?.length) { %>
+			<div class="error-messages">
+				<% messages.error.forEach(function(message) { %>
+				<p><%= message %></p>
+				<% }); %>
+			</div>
+			<% } %>
+
 			<form action="/login" method="POST" class="login-form">
 				<div>
 					<label for="email">Email:</label>
@@ -17,10 +26,6 @@
 				</div>
 				<button type="submit">Log In</button>
 			</form>
-
-			<% if (typeof error !== "undefined") { %>
-			<p style="color: red"><%= error %></p>
-			<% } %>
 		</div>
 	</body>
 </html>
