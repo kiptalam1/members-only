@@ -6,12 +6,21 @@ import passport from "passport";
 export async function getMessages(req, res) {
 	try {
 		const messages = await pool.query(
-			`SELECT messages.id, messages.title, messages.content, messages.created_at, users.first_name
+			`SELECT messages.id, messages.user_id, messages.title, messages.content, messages.created_at, users.first_name
 			FROM messages
 			JOIN users ON messages.user_id = users.id
-			ORDER BY created_at ASC`
+			ORDER BY messages.created_at ASC`
 		);
-		res.render("messages", { messages: messages.rows, currentUser: req.user });
+		const currentUserId = req.user.id;
+		const formattedMessages = messages.rows.map((msg) => ({
+			...msg,
+			user: msg.first_name,
+			isOwn: msg.user_id === currentUserId,
+		}));
+		res.render("messages", {
+			messages: formattedMessages,
+			currentUser: req.user,
+		});
 	} catch (err) {
 		console.error("Error fetching messages:", err);
 		res.status(500).send("Error loading messages");

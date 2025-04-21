@@ -4,13 +4,21 @@
 
 	<body>
 		<div class="main-container">
-			<div class="profile-container">
-				<h1>Welcome, <%= user.first_name %> <%= user.last_name %></h1>
-				<p>Email: <%= user.email %></p>
+			<%- include('partials/header') %>
 
-				<a href="/logout">Logout</a>
+			<div class="profile-container">
+				<h2>
+					Welcome,<span> <%= user.first_name %> <%= user.last_name %></span>
+				</h2>
+				<p>Email: <%= user.email %></p>
+				<p>
+					Joined: <%= user.created_at.toLocaleString( 'en-US', { hour:
+					'2-digit', minute: '2-digit', hour12: true, day: 'numeric', month:
+					'short', year: 'numeric' } ) %>
+				</p>
+				<a href="/logout" class="logout-link">Logout</a>
 				<!-- Logout button -->
-				<a href="/edit-profile">Edit Profile</a>
+				<a href="/profile/edit" class="edit-link">Edit Profile</a>
 				<!-- Optionally, you could add an edit profile page -->
 			</div>
 		</div>

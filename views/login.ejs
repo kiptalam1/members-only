@@ -4,8 +4,9 @@
 
 	<body>
 		<div class="main-container">
-			<h1>Login to GATEkept</h1>
-			<form action="/login" method="POST">
+			<%- include('partials/header') %>
+
+			<form action="/login" method="POST" class="login-form">
 				<div>
 					<label for="email">Email:</label>
 					<input type="email" name="email" id="email" required />

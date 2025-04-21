@@ -3,6 +3,8 @@
 	<%- include('partials/head') %>
 	<body>
 		<div class="main-container">
+	<%- include('partials/header') %>
+
 			<form action="/signup" method="POST" class="signup-form">
 				<input
 					type="text"
@@ -42,7 +44,7 @@
 					placeholder="Confirm password"
 					required
 				/>
-				<button type="submit">Submit</button>
+				<button type="submit">Sign Up</button>
 			</form>
 		</div>
 	</body>
